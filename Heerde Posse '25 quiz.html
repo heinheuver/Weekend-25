@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checklist & Quiz | Vriendenweekend</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: url('https://github.com/heinheuver/Weekend-25/blob/main/Copilot_20250706_104451.png?raw=true') repeat;
+      color: #000000;
+      padding: 1rem;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #000000;
+    }
+    .section {
+      max-width: 700px;
+      margin: 2rem auto;
+      background-color: #fff;
+      padding: 1rem 2rem;
+      border: 4px double #002b5c;
+      border-radius: 8px;
+    }
+    label {
+      display: block;
+      margin: 0.6rem 0;
+    }
+    input[type="checkbox"] {
+      margin-right: 0.5rem;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 1rem;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.6rem 1rem;
+      background-color: #002b5c;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    #result, #compliment {
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #b20000;
+      text-align: center;
+    }
+    #compliment {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧳 Voorbereiding & 🔍 Bestemmingsquiz</h1>
+
+  <div class="section">
+    <h2>Interactieve Inpaklijst</h2>
+    <form id="checklist">
+      <label><input type="checkbox"> Slaapzak & kussen</label>
+      <label><input type="checkbox"> Handdoek</label>
+      <label><input type="checkbox"> Zwembroek</label>
+      <label><input type="checkbox"> Een bijzondere borrel naar keuze!</label>
+      <label><input type="checkbox"> Fietsbroek + handschoentjes</label>
+      <label><input type="checkbox"> Oude schoenen</label>
+      <label><input type="checkbox"> Zonnebril (we hebben het weerbericht gecheckt &#128513;)</label>
+      <label><input type="checkbox"> Outfit voor terras & industriegebied</label>
+      <label><input type="checkbox"> Gespreksstof (optioneel, komt vanzelf)</label>
+    </form>
+    <div id="compliment"></div>
+  </div>
+
+  <div class="section">
+    <h2>🕵️ Raad de Bestemming</h2>
+    <p>De hints zijn gegeven in de uitnodiging. Vul hieronder de stad of regio in waarvan jij denkt dat we die gaan bezoeken. Bonuspunten als je ook het vervoermiddel raadt.</p>
+    <input type="text" id="guess" placeholder="Jouw gok...">
+    <button onclick="checkAnswer()">Indienen</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const checklist = document.getElementById('checklist');
+    const compliment = document.getElementById('compliment');
+
+    checklist.addEventListener('change', () => {
+      const checkboxes = checklist.querySelectorAll('input[type="checkbox"]');
+      const allChecked = Array.from(checkboxes).every(box => box.checked);
+      compliment.textContent = allChecked
+        ? "✅ Lekker gewerkt! Je hebt een koude pretcilinder 🍻 verdiend. Haal maar uit je koelkast! En hierbij ook een digitale schouderklop"
+        : "";
+    });
+
+    function checkAnswer() {
+      const guess = document.getElementById('guess').value.toLowerCase();
+      const result = document.getElementById('result');
+      if (guess.includes("ruhr")) {
+        if (guess.includes("camper")) {
+          result.textContent = "✅ Je hebt het allebei goed! Pak (nog) maar zo'n bierella uit je koelkast!";
+        } else {
+          result.textContent = "✅ Bestemming correct! Vervoersmiddel? Nog eens proberen…";
+        }
+      } else {
+        result.textContent = "❌ Hmm... dat klinkt spannend, maar nog niet juist!";
+      }
+    }
+  </script>
+</body>
+</html>
